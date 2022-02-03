@@ -7,11 +7,11 @@ def callback(data): # logs info heard from listener
     rospy.loginfo("Heard: %s", data.data)
 
 def listener():
+    pb.talker()
     rospy.init_node('tf_listener')
     rospy.Subscriber("chatter", String, callback) # when data is received, parses data into callback classes
     rospy.spin()
 
 if __name__ == '__main__':
-    pb.talker()
     listener()
     # rospy.loginfo("Daniel is cute")
