@@ -1,9 +1,9 @@
 import rospy
-import tf
+import publisher as pb
 from std_msgs.msg import String
 
 def callback(data): # logs info heard from listener
-    print(data.data)
+    # print(data.data)
     rospy.loginfo("Heard: %s", data.data)
 
 def listener():
@@ -12,5 +12,6 @@ def listener():
     rospy.spin()
 
 if __name__ == '__main__':
-    # listener()
-    rospy.loginfo("Daniel is cute")
+    pb.talker()
+    listener()
+    # rospy.loginfo("Daniel is cute")
