@@ -4,9 +4,24 @@ from std_msgs.msg import String
 import tf2_ros
 import tf2_msgs.msg
 
+translationsXYZ = [] # X and Y are relative pos coords, z = 0
+rotationsXYZW = [] # z = rotation in radians/pi ----- w = constant
+
 def callback(data): # logs info heard from listener
     # print(data.data)
-    rospy.loginfo("Heard: %s", data.data)
+    trans = data.transforms[0].transform.translation
+    rot = data.transforms[0].transform.rotation
+    translationsXYZ.append(trans)
+    rotationsXYZW.append(rot)
+
+    rospy.loginfo("------------------")
+
+    rospy.loginfo("translation: ")
+    rospy.loginfo(trans)
+
+    rospy.loginfo("rotation: ")
+    rospy.loginfo(rot)
+
 
 def listener():
     #pb.talker()
