@@ -7,7 +7,7 @@ def talker():
     rate = rospy.Rate(10) # 10hz
     #while not rospy.is_shutdown():
     hello_str = "hello world %s" % rospy.get_time() # gets current time as float seconds
-    rospy.loginfo(hello_str)
+#    rospy.loginfo(hello_str)
     pub.publish(hello_str)
     rate.sleep()
 
