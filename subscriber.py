@@ -3,16 +3,22 @@ import publisher as pb
 from std_msgs.msg import String
 import tf2_ros
 import tf2_msgs.msg
+import network as nt
 
-translationsXYZ = [] # X and Y are relative pos coords, z = 0
-rotationsXYZW = [] # z = rotation in radians/pi ----- w = constant
-
-def callback(data): # logs info heard from listener
+index = 0
+time_last_sent = 0
+def callback(data):  # logs info heard from listener
     # print(data.data)
-    trans = data.transforms[0].transform.translation
-    rot = data.transforms[0].transform.rotation
-    translationsXYZ.append(trans)
-    rotationsXYZW.append(rot)
+    trans = data.transforms[1].transform.translation  # X and Y are relative pos coords, z = 0
+    rot = data.transforms[1].transform.rotation  # z = rotation in radians/pi ----- w = constant
+    sex = data.transforms[1].header.stamp.secs
+
+    if index == 0:
+        time_last_sent = sex
+        index = 1
+    dt = sex - time_last_sent
+
+    nt.sendDataToTable(trans, rot, dt, sex)
 
     rospy.loginfo("------------------")
 
@@ -22,13 +28,13 @@ def callback(data): # logs info heard from listener
     rospy.loginfo("rotation: ")
     rospy.loginfo(rot)
 
+    time_last_sent = sex
 
-def listener():
-    #pb.talker()
+def listen():
     rospy.init_node('tf_listener')
     rospy.Subscriber("tf", tf2_msgs.msg.TFMessage, callback) # when data is received, parses data into callback classes
     rospy.spin()
 
 if __name__ == '__main__':
     listener()
-    # rospy.loginfo("Daniel is cute")
+
