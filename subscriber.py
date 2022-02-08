@@ -1,7 +1,4 @@
 import rospy
-import publisher as pb
-from std_msgs.msg import String
-import tf2_ros
 import tf2_msgs.msg
 import network as nt
 
@@ -18,15 +15,9 @@ def callback(data):  # logs info heard from listener
         index = 1
     dt = sex - time_last_sent
 
-    nt.sendDataToTable(trans, rot, dt, sex)
+    nt.send_data_to_table(trans, rot, dt)
 
-    rospy.loginfo("------------------")
 
-    rospy.loginfo("translation: ")
-    rospy.loginfo(trans)
-
-    rospy.loginfo("rotation: ")
-    rospy.loginfo(rot)
 
     time_last_sent = sex
 
