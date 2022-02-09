@@ -2,11 +2,17 @@
 
 Important Articles:
 
-http://wiki.ros.org/navigation/Tutorials/RobotSetup/TF
+  TF:
 
-https://web.ics.purdue.edu/~rvoyles/Classes/ROSprogramming/Lectures/TF%20(transform)%20in%20ROS.pdf
+    http://wiki.ros.org/navigation/Tutorials/RobotSetup/TF
 
-http://docs.ros.org/en/diamondback/api/tf2_msgs/html/msg/TFMessage.html
+    https://web.ics.purdue.edu/~rvoyles/Classes/ROSprogramming/Lectures/TF%20(transform)%20in%20ROS.pdf
+
+    http://docs.ros.org/en/diamondback/api/tf2_msgs/html/msg/TFMessage.html
+    
+  submap_list:
+  
+    
 
 TODO:
 
