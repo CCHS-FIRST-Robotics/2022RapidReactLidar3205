@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/rospyPubSub.iml" filepath="$PROJECT_DIR$/.idea/rospyPubSub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/rpLidar.iml" filepath="$PROJECT_DIR$/.idea/rpLidar.iml" />
     </modules>
   </component>
 </project>
