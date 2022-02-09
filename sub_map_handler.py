@@ -1,9 +1,9 @@
 import rospy
 import cartographer_ros_msgs.msg
-import numpy
+import pathfind as pf
 
 def callback(data):
-    return 1
+    pf.create_grid()
 
 def listen():
     rospy.init_node('sub_map_listener')
