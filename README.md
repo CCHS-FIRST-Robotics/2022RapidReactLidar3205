@@ -8,10 +8,13 @@ Important Articles:
 
     https://web.ics.purdue.edu/~rvoyles/Classes/ROSprogramming/Lectures/TF%20(transform)%20in%20ROS.pdf
 
-    http://docs.ros.org/en/diamondback/api/tf2_msgs/html/msg/TFMessage.html
+    http://docs.ros.org/en/diamondback/api/tf2_msgs/html/msg/TFMessage.html 
     
   submap_list:
   
+    https://github.com/cartographer-project/cartographer_ros/blob/master/cartographer_ros_msgs/msg/SubmapList.msg
+    
+    https://github.com/cartographer-project/cartographer_ros/blob/master/cartographer_ros_msgs/msg/SubmapEntry.msg
     
 
 TODO:
