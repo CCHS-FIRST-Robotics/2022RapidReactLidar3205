@@ -22,6 +22,5 @@ def listen():
     rospy.Subscriber("tf", tf2_msgs.msg.TFMessage, callback) # when data is received, parses data into callback classes
     rospy.spin()
 
-if __name__ == '__main__':
-    listen()
+
 
