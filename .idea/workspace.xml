@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f50df878-17dc-4a17-96b2-5580474ccda9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pathfind.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pf_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/sub_map_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sub_map_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/sub_map_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tf_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/tf_handler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

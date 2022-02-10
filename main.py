@@ -1,6 +1,6 @@
 from multiprocessing import Process
-import tf_handler as tfh # XYZ coords
-import sub_map_handler as smp # pathfind
+import tf_handler as tfh  # translation data processing
+import sub_map_handler as smp  # obstacle mapping data processing
 
 
 if __name__ == '__main__':
