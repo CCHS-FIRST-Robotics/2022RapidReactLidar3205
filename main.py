@@ -1,7 +1,10 @@
+import os
 import subprocess
 import network as nt
 import tf_handler as tf
 import submap_handler as sm
+
+os.system(". ~/catkin_ws/devel/setup.sh")
 
 reset = False # Resets ROS if it receives True value over network tables
 ros = subprocess.Popen(["roslaunch gbot_core gbot.launch"])
