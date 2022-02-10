@@ -1,11 +1,21 @@
-from multiprocessing import Process
-import tf_handler as tfh  # translation data processing
-import submap_handler as smp  # obstacle mapping data processing
+import subprocess
+import network as nt
+import tf_handler as tf
+import submap_handler as sm
 
+reset = False # Resets ROS if it receives True value over network tables
+ros = subprocess.Popen(["roslaunch gbot_core gbot.launch"])
 
-if __name__ == '__main__':
-    tf = Process(target=tfh.listen())
-    tf.start()
+while True:
+    if not reset:
+        if nt.get_reset():
+            ros.terminate()
+            ros = subprocess.Popen(["roslaunch gbot_core gbot.launch"])
+            
+            reset = True
+    else:
+        if not nt.get_reset():
+            reset = False
 
-    pf = Process(target=smp.listen())
-    pf.start()
+    tf.listen()
+    sm.listen()
