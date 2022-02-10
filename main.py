@@ -7,13 +7,13 @@ import submap_handler as sm
 os.system(". ~/catkin_ws/devel/setup.sh")
 
 reset = False # Resets ROS if it receives True value over network tables
-ros = subprocess.Popen(["roslaunch gbot_core gbot.launch"])
+ros = subprocess.Popen(["roslaunch gbot_core gbot.launch"], shell=True)
 
 while True:
     if not reset:
         if nt.get_reset():
             ros.terminate()
-            ros = subprocess.Popen(["roslaunch gbot_core gbot.launch"])
+            ros = subprocess.Popen(["roslaunch gbot_core gbot.launch"], shell=True)
             
             reset = True
     else:
