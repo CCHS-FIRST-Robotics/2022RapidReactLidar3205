@@ -13,5 +13,4 @@ def tf_data(trans, rot, dt):
 
 def get_reset():
     reset = table.getBoolean("reset", None)
-
     return reset
