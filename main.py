@@ -9,11 +9,8 @@ import submap_handler as sm
 
 path = "~/Desktop/Lidar" # TEMP PATH
 
-def run_ros():
-    os.system(". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch")
-
 reset = False # Resets ROS if it receives True value over network tables
-ros = subprocess.Popen(run_ros, shell=True)
+ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
 rospy.init_node('node')
 
 while True:
