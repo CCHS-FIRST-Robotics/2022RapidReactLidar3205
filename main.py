@@ -23,7 +23,7 @@ sm.start()
 while True:
     if not reset:
         if nt.get_reset():
-            ros.kill()
+            ros.terminate()
             ros.close()
             ros.start()
             reset = True
