@@ -10,8 +10,6 @@ path = "~/Desktop/Lidar" # TEMP PATH
 def reset_ros():
     os.system(". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch")
 
-rospy.init_node('node', anonymous=True)
-
 reset = False # Resets ROS if it receives True value over network tables
 ros = mp.Process(target=reset_ros)
 ros.start()
