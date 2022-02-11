@@ -7,3 +7,4 @@ def callback(data):  # processes data heard from listener
 
 def listen():
     rospy.Subscriber("submap_list", cartographer_ros_msgs.msg.SubmapList, callback)  # passes received data to callback method
+    rospy.spin()

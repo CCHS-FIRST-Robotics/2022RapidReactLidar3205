@@ -13,19 +13,24 @@ def reset_ros():
 rospy.init_node('node', anonymous=True)
 
 reset = False # Resets ROS if it receives True value over network tables
-proc = mp.Process(target=reset_ros)
-proc.start()
+ros = mp.Process(target=reset_ros)
+ros.start()
+
+tf = mp.Process(target=tf.listen)
+tf.start()
+
+sm = mp.Process(target=sm.listen)
+sm.start()
 
 while True:
     if not reset:
         if nt.get_reset():
-            proc.kill()
-            proc.close()
-            proc.start()
+            ros.kill()
+            ros.close()
+            ros.start()
             reset = True
     else:
         if not nt.get_reset():
             reset = False
 
-    tf.listen()
-    sm.listen()
+    
