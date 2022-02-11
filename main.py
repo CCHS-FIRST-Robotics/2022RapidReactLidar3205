@@ -5,10 +5,9 @@ import tf_handler as tf
 import submap_handler as sm
 
 path = "~/catkin_ws"
-os.system(". " + path + "/devel/setup.sh")
 
 def reset_ros():
-    os.system("roslaunch gbot_core gbot.launch")
+    os.system(". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch")
 
 reset = False # Resets ROS if it receives True value over network tables
 proc = mp.Process(target=reset_ros)
