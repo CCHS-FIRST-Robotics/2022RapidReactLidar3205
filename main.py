@@ -1,34 +1,30 @@
 import os
 import rospy
-import multiprocessing as mp
+import subprocess
+from threading import Thread
+
 import network as nt
 import tf_handler as tf
 import submap_handler as sm
 
 path = "~/Desktop/Lidar" # TEMP PATH
 
-def reset_ros():
+def run_ros():
     os.system(". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch")
 
 reset = False # Resets ROS if it receives True value over network tables
-ros = mp.Process(target=reset_ros)
-ros.start()
-
-tf = mp.Process(target=tf.listen)
-tf.start()
-
-sm = mp.Process(target=sm.listen)
-sm.start()
+ros = subprocess.Popen(run_ros, shell=True)
+rospy.init_node('node')
 
 while True:
     if not reset:
         if nt.get_reset():
-            ros.terminate()
-            ros.close()
-            ros.start()
+            ros.kill()
+            ros = subprocess.Popen(run_ros, shell=True)
             reset = True
     else:
         if not nt.get_reset():
             reset = False
-
     
+    tf.listen()
+    sm.listen()
