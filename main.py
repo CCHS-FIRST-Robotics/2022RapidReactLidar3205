@@ -15,7 +15,8 @@ path = "~/catkin_ws" # TEMP PATH
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-def wait_for_ros(): # Waits for ROS nodes to start before reading from topics
+def ros_start(): # Waits for ROS nodes to start before reading from topics
+    ros = subprocess.Popen([". " + path + "/devel/setup.sh && exec roslaunch gbot_core gbot.launch"], shell=True)
     online = False
     
     while not online:
@@ -25,6 +26,7 @@ def wait_for_ros(): # Waits for ROS nodes to start before reading from topics
             time.sleep(1)
         
     time.sleep(5) # BRUTE FORCE SLEEP MAY BREAK IN SOME CASES
+    return ros
  
     
 def proc_start():
@@ -39,9 +41,7 @@ def proc_start():
             
 reset = False # Resets ROS if it receives True value over network tables
 
-ros = subprocess.Popen([". " + path + "/devel/setup.sh && exec roslaunch gbot_core gbot.launch"], shell=True)
-wait_for_ros()
-
+ros = ros_start()
 tf_proc, sm_proc = proc_start()
 
 while True:
@@ -53,10 +53,9 @@ while True:
             tf_proc.terminate()
             sm_proc.terminate()
             
-            ros = subprocess.Popen([". " + path + "/devel/setup.sh && exec roslaunch gbot_core gbot.launch"], shell=True)
-            wait_for_ros()
-            
+            ros = ros_start()
             tf_proc, sm_proc = proc_start()
+            
             reset = True
     else:
         if not nt.get_reset():
