@@ -1,18 +1,19 @@
 import os
+import var
 import time
 import rospy
 import signal
 import socket
 import subprocess
 from networktables import NetworkTables
+from roslaunch.parent import ROSLaunchParent
 
-import var
 
-
+ros = ROSLaunchParent("ros", [var + '/src/gbot_core/launch/gbot.launch'])
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def ros_start(): # Waits for ROS nodes to start before reading from topics
-    ros = subprocess.Popen(["/bin/bash", "launch.sh"])
+    ros.start()
     online = False
     
     while not online:
@@ -22,7 +23,6 @@ def ros_start(): # Waits for ROS nodes to start before reading from topics
             time.sleep(1)
         
     time.sleep(5) # BRUTE FORCE SLEEP MAY BREAK IN SOME CASES
-    return ros
  
     
 def proc_start():
@@ -42,21 +42,20 @@ def get_reset():
    
 reset = False # Resets ROS if it receives True value over network tables
 
-ros = ros_start()
+ros_start()
 tf_proc, sm_proc = proc_start()
 
 while True:
     if not reset:
         if get_reset():
-            os.kill(ros.pid, signal.SIGTERM)
-            ros.wait()
+            ros.shutdown()
             
             tf_proc.terminate()
-            sm_proc.terminate()
             tf_proc.wait()
+            sm_proc.terminate()
             sm_proc.wait()
             
-            ros = ros_start()
+            ros_start()
             tf_proc, sm_proc = proc_start()
             
             reset = True
