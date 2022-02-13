@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import rospy
+import signal
 import socket
 import subprocess
 from threading import Thread
@@ -34,9 +35,9 @@ try:
     while True:
         if not reset:
             if nt.get_reset():
-                ros.kill()
-                #ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
-                #wait_for_ros()
+                os.killpg(os.getgid(ros.pid), signal.SIGTERM)
+                ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
+                wait_for_ros()
                 reset = True
         else:
             if not nt.get_reset():
@@ -46,5 +47,5 @@ try:
         sm.listen()
         
 except KeyboardInterrupt:
-    ros.kill()
+    os.killpg(os.getgid(ros.pid), signal.SIGTERM)
     sys.exit()
