@@ -20,9 +20,9 @@ def ros_start(): # Waits for ROS nodes to start before reading from topics
         if sock.connect_ex(('127.0.0.1', 11311)) == 0:
             online = True
         else:
-            time.sleep(1)
+            rospy.sleep(1)
         
-    time.sleep(5) # BRUTE FORCE SLEEP MAY BREAK IN SOME CASES
+    rospy.sleep(5) # BRUTE FORCE SLEEP MAY BREAK IN SOME CASES
     
     return ros
  
@@ -51,6 +51,7 @@ while True:
     if not reset:
         if get_reset():
             ros.shutdown()
+            rospy.sleep(5)
             
             tf_proc.terminate()
             tf_proc.wait()
