@@ -1,3 +1,4 @@
+import os
 import time
 import rospy
 import signal
@@ -47,11 +48,11 @@ tf_proc, sm_proc = proc_start()
 while True:
     if not reset:
         if get_reset():
-            ros.send_signal(signal.SIGINT)
+            os.kill(ros.pid, signal.SIGTERM)
+            ros.wait()
+            
             tf_proc.terminate()
             sm_proc.terminate()
-            
-            ros.wait()
             tf_proc.wait()
             sm_proc.wait()
             
