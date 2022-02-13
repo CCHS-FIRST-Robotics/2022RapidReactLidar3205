@@ -34,9 +34,12 @@ try:
     while True:
         if not reset:
             if nt.get_reset():
-                ros.kill()
+                ros.terminate()
+                ros.wait()
+                
                 ros = subprocess.Popen([". " + path + "/devel/setup.sh && exec roslaunch gbot_core gbot.launch"], shell=True)
                 wait_for_ros()
+                
                 reset = True
         else:
             if not nt.get_reset():
@@ -46,5 +49,6 @@ try:
         sm.listen()
         
 except KeyboardInterrupt:
-    ros.kill()
+    ros.terminate()
+    ros.wait()
     sys.exit()
