@@ -44,24 +44,20 @@ wait_for_ros()
 
 tf_proc, sm_proc = proc_start()
 
-def main():
-    while True:
-        if not reset:
-            if nt.get_reset():
-                ros.terminate()
-                ros.wait()
-                
-                tf_proc.terminate()
-                sm_proc.terminate()
-                
-                ros = subprocess.Popen([". " + path + "/devel/setup.sh && exec roslaunch gbot_core gbot.launch"], shell=True)
-                wait_for_ros()
-                
-                tf_proc, sm_proc = proc_start()
-                reset = True
-        else:
-            if not nt.get_reset():
-                reset = False
-                
-if __name__ == "__main__":
-    main()
+while True:
+    if not reset:
+        if nt.get_reset():
+            ros.terminate()
+            ros.wait()
+            
+            tf_proc.terminate()
+            sm_proc.terminate()
+            
+            ros = subprocess.Popen([". " + path + "/devel/setup.sh && exec roslaunch gbot_core gbot.launch"], shell=True)
+            wait_for_ros()
+            
+            tf_proc, sm_proc = proc_start()
+            reset = True
+    else:
+        if not nt.get_reset():
+            reset = False
