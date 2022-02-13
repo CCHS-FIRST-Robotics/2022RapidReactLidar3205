@@ -4,8 +4,6 @@ import time
 import rospy
 import socket
 import subprocess
-from threading import Thread
-from multiprocessing import Process
 
 import network as nt
 import tf_handler as tf
@@ -30,11 +28,8 @@ def ros_start(): # Waits for ROS nodes to start before reading from topics
  
     
 def proc_start():
-    tf_proc = Process(target=tf.listen)
-    tf_proc.start()
-    
-    sm_proc = Process(target=sm.listen)
-    sm_proc.start()
+    tf_proc = subprocess.Popen(['python', 'tf_handler.py'])
+    sm_proc = subprocess.Popen(['python', 'submap_handler.py'])
     
     return tf_proc, sm_proc
  
@@ -48,10 +43,12 @@ while True:
     if not reset:
         if nt.get_reset():
             ros.terminate()
-            ros.wait()
-            
             tf_proc.terminate()
             sm_proc.terminate()
+            
+            ros.wait()
+            tf_proc.wait()
+            sm_proc.wait()
             
             ros = ros_start()
             tf_proc, sm_proc = proc_start()

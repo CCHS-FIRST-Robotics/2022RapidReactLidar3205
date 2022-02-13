@@ -23,3 +23,6 @@ def listen():
     rospy.init_node('tf_listener')
     rospy.Subscriber("tf", tf2_msgs.msg.TFMessage, callback)  # passes received data to callback method
     rospy.spin()
+    
+if __name__ == "__main__":
+    listen()
