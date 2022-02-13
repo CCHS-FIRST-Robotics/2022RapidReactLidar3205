@@ -43,33 +43,21 @@ reset = False # Resets ROS if it receives True value over network tables
 ros = ros_start()
 tf_proc, sm_proc = proc_start()
 
-# while True:
-#     if not reset:
-#         if get_reset():
-#             ros.terminate()
-#             tf_proc.terminate()
-#             sm_proc.terminate()
+while True:
+    if not reset:
+        if get_reset():
+            ros.terminate()
+            tf_proc.terminate()
+            sm_proc.terminate()
             
-#             ros.wait()
-#             tf_proc.wait()
-#             sm_proc.wait()
+            ros.wait()
+            tf_proc.wait()
+            sm_proc.wait()
             
-#             ros = ros_start()
-#             tf_proc, sm_proc = proc_start()
+            ros = ros_start()
+            tf_proc, sm_proc = proc_start()
             
-#             reset = True
-#     else:
-#         if not get_reset():
-#             reset = False
-
-time.sleep(20)
-ros.terminate()
-tf_proc.terminate()
-sm_proc.terminate()
-
-ros.wait()
-tf_proc.wait()
-sm_proc.wait()
-
-ros = ros_start()
-tf_proc, sm_proc = proc_start()
+            reset = True
+    else:
+        if not get_reset():
+            reset = False
