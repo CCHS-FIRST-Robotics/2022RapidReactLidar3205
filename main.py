@@ -3,6 +3,7 @@ import sys
 import time
 import rospy
 import socket
+import rosnode
 import subprocess
 from threading import Thread
 
@@ -13,15 +14,15 @@ import submap_handler as sm
 path = "~/catkin_ws" # TEMP PATH
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-def wait_for_ros(): # Waits for ROS port to open before reading from topics
+def wait_for_ros(): # Waits for ROS nodes to start before reading from topics
     online = False
     
     while not online:
         if sock.connect_ex(('127.0.0.1', 11311)) == 0:
-            print("ONLINE")
-            online = True
-        else:
-            time.sleep(1)
+            if len(rosnode.get_node_names()) >= 5:
+                online = True
+        
+        time.sleep(1)
             
 reset = False # Resets ROS if it receives True value over network tables
 
