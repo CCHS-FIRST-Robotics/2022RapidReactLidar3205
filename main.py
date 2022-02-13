@@ -3,7 +3,6 @@ import sys
 import time
 import rospy
 import socket
-import rosnode
 import subprocess
 from threading import Thread
 
@@ -19,10 +18,11 @@ def wait_for_ros(): # Waits for ROS nodes to start before reading from topics
     
     while not online:
         if sock.connect_ex(('127.0.0.1', 11311)) == 0:
-            if len(rosnode.get_node_names()) >= 5:
-                online = True
+            online = True
+        else:
+            time.sleep(1)
         
-        time.sleep(1)
+    time.sleep(5)
             
 reset = False # Resets ROS if it receives True value over network tables
 
