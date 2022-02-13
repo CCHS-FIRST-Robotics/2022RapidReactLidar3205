@@ -35,8 +35,8 @@ try:
         if not reset:
             if nt.get_reset():
                 ros.kill()
-                ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
-                wait_for_ros()
+                #ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
+                #wait_for_ros()
                 reset = True
         else:
             if not nt.get_reset():
