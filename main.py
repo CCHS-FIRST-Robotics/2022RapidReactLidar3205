@@ -10,8 +10,7 @@ import var
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def ros_start(): # Waits for ROS nodes to start before reading from topics
-    #ros = subprocess.Popen([". " + var.path + "/devel/setup.sh && exec roslaunch gbot_core gbot.launch"])
-    ros = subprocess.Popen(['. ', var.path + '/devel/setup.sh', '&&', 'roslaunch', 'gbot_core', 'gbot_launch']) #may need exec
+    ros = subprocess.Popen([". " + var.path + "/devel/setup.sh && exec roslaunch gbot_core gbot.launch"])
     online = False
     
     # while not online:
