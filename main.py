@@ -17,6 +17,8 @@ def wait_for_ros(): # Waits for ROS port to open before reading from topics
     
     while not online:
         if sock.connect_ex(('127.0.0.1', 11311)) == 0:
+            print("ONLINE")
+            time.sleep(1)
             online = True
         else:
             time.sleep(1)
