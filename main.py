@@ -7,7 +7,7 @@ import network as nt
 import tf_handler as tf
 import submap_handler as sm
 
-path = "~/Desktop/Lidar" # TEMP PATH
+path = "~/catkin_ws" # TEMP PATH
 
 reset = False # Resets ROS if it receives True value over network tables
 ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
@@ -17,7 +17,7 @@ while True:
     if not reset:
         if nt.get_reset():
             ros.kill()
-            ros = subprocess.Popen(run_ros, shell=True)
+            ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
             reset = True
     else:
         if not nt.get_reset():
