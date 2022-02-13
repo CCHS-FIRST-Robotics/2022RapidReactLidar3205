@@ -14,19 +14,18 @@ path = "~/catkin_ws" # TEMP PATH
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 def wait_for_ros(): # Waits for ROS port to open before reading from topics
-    # online = False
+    online = False
     
-    # while not online:
-    #     if sock.connect_ex(('127.0.0.1', 11311)) == 0:
-    #         print("ONLINE")
-    #         online = True
-    #     else:
-    #         time.sleep(1)
-    time.sleep(20)
+    while not online:
+        if sock.connect_ex(('127.0.0.1', 11311)) == 0:
+            print("ONLINE")
+            online = True
+        else:
+            time.sleep(1)
             
 reset = False # Resets ROS if it receives True value over network tables
 
-ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
+ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch --wait gbot_core gbot.launch"], shell=True)
 wait_for_ros()
 rospy.init_node('node')
 
@@ -35,7 +34,7 @@ try:
         if not reset:
             if nt.get_reset():
                 ros.kill()
-                ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
+                ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch --wait gbot_core gbot.launch"], shell=True)
                 wait_for_ros()
                 reset = True
         else:
