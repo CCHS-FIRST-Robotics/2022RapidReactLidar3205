@@ -23,9 +23,9 @@ def wait_for_ros(): # Waits for ROS port to open before reading from topics
             
 reset = False # Resets ROS if it receives True value over network tables
 
-rospy.init_node('node')
 ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
 wait_for_ros()
+rospy.init_node('node')
 
 while True:
     if not reset:
