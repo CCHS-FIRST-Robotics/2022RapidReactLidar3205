@@ -9,7 +9,7 @@ from networktables import NetworkTables
 from roslaunch.parent import ROSLaunchParent
 
 
-ros = ROSLaunchParent("ros", [var + '/src/gbot_core/launch/gbot.launch'])
+ros = ROSLaunchParent("ros", [var.path + '/src/gbot_core/launch/gbot.launch'])
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def ros_start(): # Waits for ROS nodes to start before reading from topics
