@@ -22,7 +22,7 @@ def wait_for_ros(): # Waits for ROS nodes to start before reading from topics
         else:
             time.sleep(1)
         
-    time.sleep(5)
+    time.sleep(5) # BRUTE FORCE SLEEP MAY BREAK IN SOME CASES
             
 reset = False # Resets ROS if it receives True value over network tables
 
