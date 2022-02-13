@@ -1,5 +1,6 @@
 import time
 import rospy
+import signal
 import socket
 import subprocess
 from networktables import NetworkTables
@@ -46,7 +47,7 @@ tf_proc, sm_proc = proc_start()
 while True:
     if not reset:
         if get_reset():
-            ros.terminate()
+            ros.send_signal(signal.SIGINT)
             tf_proc.terminate()
             sm_proc.terminate()
             
