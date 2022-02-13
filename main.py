@@ -26,7 +26,7 @@ def wait_for_ros(): # Waits for ROS nodes to start before reading from topics
             
 reset = False # Resets ROS if it receives True value over network tables
 
-ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch --wait gbot_core gbot.launch"], shell=True)
+ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
 wait_for_ros()
 rospy.init_node('node')
 
@@ -35,7 +35,7 @@ try:
         if not reset:
             if nt.get_reset():
                 ros.kill()
-                ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch --wait gbot_core gbot.launch"], shell=True)
+                ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
                 wait_for_ros()
                 reset = True
         else:
