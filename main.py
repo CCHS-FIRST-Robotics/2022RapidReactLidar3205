@@ -2,7 +2,6 @@ import os
 import sys
 import time
 import rospy
-import signal
 import socket
 import subprocess
 from threading import Thread
@@ -27,7 +26,7 @@ def wait_for_ros(): # Waits for ROS nodes to start before reading from topics
             
 reset = False # Resets ROS if it receives True value over network tables
 
-ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
+ros = subprocess.Popen([". " + path + "/devel/setup.sh && exec roslaunch gbot_core gbot.launch"], shell=True)
 wait_for_ros()
 rospy.init_node('node')
 
@@ -35,8 +34,8 @@ try:
     while True:
         if not reset:
             if nt.get_reset():
-                os.killpg(os.getgid(ros.pid), signal.SIGTERM)
-                ros = subprocess.Popen([". " + path + "/devel/setup.sh && roslaunch gbot_core gbot.launch"], shell=True)
+                ros.kill()
+                ros = subprocess.Popen([". " + path + "/devel/setup.sh && exec roslaunch gbot_core gbot.launch"], shell=True)
                 wait_for_ros()
                 reset = True
         else:
@@ -47,5 +46,5 @@ try:
         sm.listen()
         
 except KeyboardInterrupt:
-    os.killpg(os.getgid(ros.pid), signal.SIGTERM)
+    ros.kill()
     sys.exit()
