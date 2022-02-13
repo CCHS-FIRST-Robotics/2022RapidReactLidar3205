@@ -13,11 +13,11 @@ def ros_start(): # Waits for ROS nodes to start before reading from topics
     ros = subprocess.Popen([". " + var.path + "/devel/setup.sh && exec roslaunch gbot_core gbot.launch"])
     online = False
     
-    while not online:
-        if sock.connect_ex(('127.0.0.1', 11311)) == 0:
-            online = True
-        else:
-            time.sleep(1)
+    # while not online:
+    #     if sock.connect_ex(('127.0.0.1', 11311)) == 0:
+    #         online = True
+    #     else:
+    #         time.sleep(1)
         
     time.sleep(5) # BRUTE FORCE SLEEP MAY BREAK IN SOME CASES
     return ros
