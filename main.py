@@ -6,7 +6,9 @@ from networktables import NetworkTables
 
 import var
 
+
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
 def ros_start(): # Waits for ROS nodes to start before reading from topics
     ros = subprocess.Popen([". " + var.path + "/devel/setup.sh && exec roslaunch gbot_core gbot.launch"], shell=True)
     online = False
@@ -27,12 +29,13 @@ def proc_start():
     
     return tf_proc, sm_proc
 
+
 NetworkTables.initialize(server=var.ip)
 table = NetworkTables.getTable("lidar")
+
 def get_reset():
     reset = table.getBoolean("reset", False)
     return reset
- 
  
    
 reset = False # Resets ROS if it receives True value over network tables
