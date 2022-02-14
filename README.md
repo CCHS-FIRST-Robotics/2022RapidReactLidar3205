@@ -17,6 +17,19 @@ Important Articles:
     https://github.com/cartographer-project/cartographer_ros/blob/master/cartographer_ros_msgs/msg/SubmapEntry.msg
     
 
-TODO:
+Notes:
 
-Measure translation between center of laser and center of robot base
+    nav_msgs/Odometry Message
+
+    Pose
+
+      Expresses “pose” composed of position and orientation
+
+        Point position —> (x,y) position
+        Quaternion orientation —> (z,w) rotation orientation
+    Twist
+
+      Expresses velocity broken into its linear and angular parts
+
+        Vector3 linear —> linear velocity
+        Vector3 angular —> angular velocity
