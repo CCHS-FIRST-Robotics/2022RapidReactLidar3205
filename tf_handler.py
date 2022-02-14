@@ -1,6 +1,6 @@
 import rospy
 import tf2_msgs.msg
-import network as nt
+import network as nw
 
 time_last_sent = 0
 
@@ -16,7 +16,7 @@ def callback(data):  # processes data heard from listener
 
     dt = nsex - tf.time_last_sent
 
-    nt.tf_data(trans, rot, dt)
+    nw.tf_data(trans, rot, dt)
     tf.time_last_sent = nsex
 
 def listen():
