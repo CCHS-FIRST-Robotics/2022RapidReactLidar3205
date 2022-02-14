@@ -35,7 +35,6 @@ while True:
     if not reset:
         if nw.get_reset():
             ros.shutdown()
-            rospy.sleep(5)
             
             tf_proc.terminate()
             tf_proc.wait()
