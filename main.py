@@ -11,19 +11,11 @@ from roslaunch.parent import ROSLaunchParent
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-def ros_start(): # Waits for ROS nodes to start before reading from topics
+def ros_start(): # Waits for ROS to start
     ros = ROSLaunchParent("ros", [var.path + '/src/gbot_core/launch/gbot.launch'])
     ros.start()
-    online = False
-    
-    while not online:
-        if sock.connect_ex(('127.0.0.1', 11311)) == 0:
-            online = True
-        else:
-            rospy.sleep(1)
-        
+            
     rospy.sleep(5) # BRUTE FORCE SLEEP MAY BREAK IN SOME CASES
-    
     return ros
  
     
