@@ -27,6 +27,7 @@ Notes:
 
         Point position —> (x,y) position
         Quaternion orientation —> (z,w) rotation orientation
+        
     Twist
 
       Expresses velocity broken into its linear and angular parts
