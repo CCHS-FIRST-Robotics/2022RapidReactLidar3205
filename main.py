@@ -7,6 +7,7 @@ import socket
 import subprocess
 import network as nw
 from networktables import NetworkTables
+from roslaunch.parent import ROSLaunchParent
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
