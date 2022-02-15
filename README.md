@@ -2,6 +2,14 @@
 
 Important Articles:
 
+  ROS:
+    
+    https://medium.com/robotics-weekends/2d-mapping-using-google-cartographer-and-rplidar-with-raspberry-pi-a94ce11e44c5
+    
+    https://google-cartographer-ros.readthedocs.io/en/latest/configuration.html
+    
+    https://google-cartographer-ros.readthedocs.io/en/latest/ros_api.html
+    
   TF:
 
     http://wiki.ros.org/navigation/Tutorials/RobotSetup/TF
