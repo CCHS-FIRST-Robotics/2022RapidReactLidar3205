@@ -1,6 +1,6 @@
 import rospy
-import tf2_msgs.msg
 import network as nw
+from tf2_msgs.msg import TFMessage
 
 time_last_sent = 0
 
@@ -21,7 +21,7 @@ def callback(data):  # processes data heard from listener
 
 def listen():
     rospy.init_node('tf_listener')
-    rospy.Subscriber("tf", tf2_msgs.msg.TFMessage, callback)  # passes received data to callback method
+    rospy.Subscriber("tf", TFMessage, callback)  # passes received data to callback method
     rospy.spin()
     
 if __name__ == "__main__":

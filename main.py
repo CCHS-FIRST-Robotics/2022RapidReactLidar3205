@@ -1,16 +1,10 @@
-import os
 import var
-import time
 import rospy
-import signal
-import socket
 import subprocess
 import network as nw
 from networktables import NetworkTables
 from roslaunch.parent import ROSLaunchParent
 
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def ros_start(): # Waits for ROS to start
     ros = ROSLaunchParent("ros", [var.path + '/src/gbot_core/launch/gbot.launch'])

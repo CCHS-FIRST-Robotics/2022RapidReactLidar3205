@@ -6,10 +6,11 @@ NetworkTables.initialize(server=var.ip)
 lidar = NetworkTables.getTable("lidar")
 state = NetworkTables.getTable("State")
 
+# TODO: Represent heading in radians
 def tf_data(trans, rot, dt):
     lidar.putNumber("p_x_pos", trans.x)
     lidar.putNumber("p_y_pos", trans.y)
-    lidar.putNumber("p_heading", rot.z)
+    lidar.putNumber("p_heading", rot.w) # rot.z is the position of the point the lidar in rotating around
     lidar.putNumber("dt", dt)
     
 def get_reset():
