@@ -16,6 +16,14 @@ Important Articles:
     
     https://github.com/cartographer-project/cartographer_ros/blob/master/cartographer_ros_msgs/msg/SubmapEntry.msg
     
+  Odometry:
+  
+    http://wiki.ros.org/tf2/Tutorials/Quaternions
+    
+    https://answers.ros.org/question/346720/set-xy-goals-and-move-the-robot/
+    
+    https://www.miguelalonsojr.com/blog/robotics/ros/python3/2019/08/20/ros-melodic-python-3-build.html
+
 
 Notes:
 
