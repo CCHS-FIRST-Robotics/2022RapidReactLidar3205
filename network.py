@@ -1,16 +1,21 @@
 import var
 from networktables import NetworkTables
 
+# raspi radio IP - 10.32.5.19
+
 NetworkTables.initialize(server=var.ip)
 
 lidar = NetworkTables.getTable("lidar")
 state = NetworkTables.getTable("State")
 
-# TODO: Represent heading in radians
 def tf_data(trans, rot, dt):
     lidar.putNumber("p_x_pos", trans.x)
     lidar.putNumber("p_y_pos", trans.y)
-    lidar.putNumber("p_heading", rot.w) # rot.z is the position of the point the lidar in rotating around
+    lidar.putNumber("p_heading", rot.w) # rot.w is the position of the point the lidar in rotating around
+                                        # z decreases as the lidar rotates cw, increases as the lidar rotates cw'
+                                        # w = |radians/pi|
+                                        # angle = {-w, z < 0}
+                                        #         {w,  z > 0}
     lidar.putNumber("dt", dt)
     
 def get_reset():
