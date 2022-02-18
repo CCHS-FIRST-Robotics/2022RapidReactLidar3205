@@ -26,7 +26,7 @@ def get_state():
     vals = []
 
     vals.append(state.getNumber("x_pos", 0.0))
-    vals.apeend(state.getNumber("y_pos", 0.0))
+    vals.append(state.getNumber("y_pos", 0.0))
     vals.append(state.getNumber("heading", 0.0))
     vals.append(state.getNumber("x_vel", 0.0))
     vals.append(state.getNumber("y_vel", 0.0))
