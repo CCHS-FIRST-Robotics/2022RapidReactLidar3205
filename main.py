@@ -2,7 +2,6 @@ import var
 import rospy
 import subprocess
 import network as nw
-from networktables import NetworkTables
 from roslaunch.parent import ROSLaunchParent
 
 
