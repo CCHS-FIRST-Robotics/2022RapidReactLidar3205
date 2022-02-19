@@ -6,11 +6,11 @@ from networktables import NetworkTables
 from roslaunch.parent import ROSLaunchParent
 
 
-def ros_start(): # Waits for ROS to start
+def ros_start(): # Starts and waits for ROS to initialize
     ros = ROSLaunchParent("ros", [var.path + '/src/gbot_core/launch/gbot.launch'])
     ros.start()
             
-    rospy.sleep(5) # BRUTE FORCE SLEEP MAY BREAK IN SOME CASES
+    rospy.sleep(5)
     return ros
  
     
