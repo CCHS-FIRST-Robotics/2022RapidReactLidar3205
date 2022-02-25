@@ -31,7 +31,7 @@ while True:
             
             tf_proc.terminate()
             tf_proc.wait()
-            od_proc.terminate()
+            od_proc.kill() # Bad practice?
             od_proc.wait()
             
             ros = ros_start()
