@@ -8,7 +8,7 @@ def talk():
     odom_pub = rospy.Publisher("odom", Odometry, queue_size=50)
     # odom_tf = tf.TransformBroadcaster()
     
-    rospy.init_node('odom_talker')
+    rospy.init_node('odom_talker', anonymous=True)
     while True:
         vars = nw.get_state() # x_pos, y_pos, heading, x_vel, y_vel, a_vel
 

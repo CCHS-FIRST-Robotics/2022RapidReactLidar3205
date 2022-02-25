@@ -20,7 +20,7 @@ def callback(data):  # processes data heard from listener
     tf.time_last_sent = nsex
 
 def listen():
-    rospy.init_node('tf_listener')
+    rospy.init_node('tf_listener', anonymous=True)
     rospy.Subscriber("tf", TFMessage, callback)  # passes received data to callback method
     rospy.spin()
     
