@@ -1,6 +1,5 @@
 import var
 import rospy
-import rosgraph
 import subprocess
 import network as nw
 from roslaunch.parent import ROSLaunchParent
@@ -9,9 +8,6 @@ from roslaunch.parent import ROSLaunchParent
 def ros_start(): # Starts and waits for ROS to initialize
     ros = ROSLaunchParent("ros", [var.path + '/src/gbot_core/launch/gbot.launch'])
     ros.start()
-    
-    while not rosgraph.is_master_online():
-        rospy.sleep(1)
             
     rospy.sleep(5)
     return ros
@@ -45,9 +41,3 @@ while True:
     else:
         if not nw.get_reset():
             reset = False
-            
-    if not rosgraph.is_master_online():
-        tf_proc.terminate()
-        tf_proc.wait()
-        od_proc.terminate()
-        od_proc.wait()

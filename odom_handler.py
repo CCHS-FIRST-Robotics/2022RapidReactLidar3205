@@ -8,7 +8,7 @@ def talk():
     odom_pub = rospy.Publisher("odom", Odometry, queue_size=50)
     # odom_tf = tf.TransformBroadcaster()
     
-    rospy.init_node('odom_talker', anonymous=True)
+    rospy.init_node('odom_talker')
     while True:
         vars = nw.get_state() # x_pos, y_pos, heading, x_vel, y_vel, a_vel
 
@@ -25,10 +25,12 @@ def talk():
 
         odom = Odometry()
         odom.child_frame_id = "base_link"
+        
         odom.header.stamp = current_time
         odom.header.frame_id = "odom"
 
         odom.pose.pose = Pose(Point(vars[0], vars[1], 0.), Quaternion(*odom_quat))
+
         odom.twist.twist = Twist(Vector3(vars[3], vars[4], 0), Vector3(0, 0, vars[5]))
 
         odom_pub.publish(odom)
