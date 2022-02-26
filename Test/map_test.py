@@ -23,8 +23,8 @@ def callback(data):  # processes data heard from listener
     width = data.info.width # Width of the map array
     height = data.info.height # Height of the... you know
     
-    origin_x = round(data.info.origin.position.x)
-    origin_y = round(data.info.origin.position.y)
+    origin_x = int(round(data.info.origin.position.x))
+    origin_y = int(round(data.info.origin.position.y))
     
     pygame_update(map_array, width, height, origin_x, origin_y)
     
@@ -44,8 +44,11 @@ def pygame_update(map_array, width, height, origin_x, origin_y):
     
     for y in range(height):
         for x in range(width):
-            color = map_array[y*width+x]
-            display.set_at((origin_x + x, origin_y + y), pygame.Color(color, color, color))
+            prob = map_array[y*width+x]
+            color = prob + 155 # Probably max is 100. RGB max is 255. I want probably represented in color.
+            
+            if prob != -1:
+                display.set_at((origin_x + x, origin_y + y), pygame.Color(color, color, color))
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
