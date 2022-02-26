@@ -5,10 +5,10 @@ from nav_msgs.msg import OccupancyGrid
 
 pygame.init()
 
-window_w = 800
-window_h = 800
+window_w = 300
+window_h = 300
 
-display = pygame.display.set_mode((window_w, window_h))
+display = pygame.display.set_mode((window_w, window_h), pygame.RESIZABLE)
 pygame.display.set_caption("Point Cloud")
 
 def callback(data):  # processes data heard from listener
