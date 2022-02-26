@@ -12,11 +12,14 @@ def callback(data):  # processes data heard from listener
     
     map_array = data.data
     
+    # Splits the 1D map array into seperate arrays based on the specified width and height provided by Cartographer
     for y in range(height):
         map_row = []
         for x in range(width):
             map_row.append(map_array[y*width+x])
         print(map_row)
+        
+    # TODO: Do Tkinter or something to graph the points or something idk i'm tired    
         
     print("---------------------")
             
