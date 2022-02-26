@@ -15,7 +15,7 @@ def callback(data):  # processes data heard from listener
     for y in range(height):
         map_row = []
         for x in range(width):
-            map_row[x] = map_array[y*width+x]
+            map_row.append(map_array[y*width+x])
         print(map_row)
         
     print("---------------------")
