@@ -7,8 +7,9 @@ NetworkTables.initialize(server=var.ip)
 
 lidar = NetworkTables.getTable("lidar")
 state = NetworkTables.getTable("State")
+point = NetworkTables.getTable("point")
 
-def tf_data(trans, rot, dt):
+def send_tf_data(trans, rot, dt):
     lidar.putNumber("p_x_pos", trans.x)
     lidar.putNumber("p_y_pos", trans.y)
     lidar.putNumber("p_heading", rot.w) # rot.w is the position of the point the lidar in rotating around
@@ -17,7 +18,14 @@ def tf_data(trans, rot, dt):
                                         # angle = {-w, z < 0}
                                         #         {w,  z > 0}
     lidar.putNumber("dt", dt)
-    
+
+def send_map_data(map_array, width, height, origin_x, origin_y):
+    point.putNumberArray("m_array", map_array)
+    point.putNumber("m_width", width)
+    point.putNumber("m_height", height)
+    point.putNumber("m_origin_x", origin_x)
+    point.putNumber("m_origin_y", origin_y)
+
 def get_reset():
     reset = lidar.getBoolean("reset", False)
     return reset

@@ -16,13 +16,14 @@ def ros_start(): # Starts and waits for ROS to initialize
 def proc_start():
     tf_proc = subprocess.Popen(['python', 'tf_handler.py'])
     od_proc = subprocess.Popen(['python', 'odom_handler.py'])
+    mp_proc = subprocess.Popen(['python', 'map_handler.py'])
     
-    return tf_proc, od_proc
+    return tf_proc, od_proc, mp_proc
 
 
 reset = False # Resets ROS if it receives True value over network tables
 ros = ros_start()
-tf_proc, od_proc = proc_start()
+tf_proc, od_proc, mp_proc = proc_start()
 
 while True:
     if not reset:
@@ -33,9 +34,11 @@ while True:
             tf_proc.wait()
             od_proc.kill() # Bad practice?
             od_proc.wait()
+            mp_proc.terminate()
+            mp_proc.wait()
             
             ros = ros_start()
-            tf_proc, od_proc = proc_start()
+            tf_proc, od_proc, mp_proc = proc_start()
             
             reset = True
     else:
