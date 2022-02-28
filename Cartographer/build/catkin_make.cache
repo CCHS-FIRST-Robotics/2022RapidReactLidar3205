@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/ubuntu/2022RapidReactLidar3205/Cartographer/devel -DCMAKE_INSTALL_PREFIX=/home/ubuntu/2022RapidReactLidar3205/Cartographer/install -G Unix Makefiles
