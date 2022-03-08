@@ -6,7 +6,7 @@ from geometry_msgs.msg import Point, Pose, Quaternion, Twist, Vector3
 
 def talk():
     odom_pub = rospy.Publisher("odom", Odometry, queue_size=50)
-    # odom_tf = tf.TransformBroadcaster()
+    odom_tf = tf.TransformBroadcaster()
     rospy.init_node('odom_talker', anonymous=True)
 
     old_vars = []
@@ -17,13 +17,13 @@ def talk():
             current_time = rospy.Time.now()
             odom_quat = tf.transformations.quaternion_from_euler(0, 0, new_vars[2])
 
-            # odom_tf.sendTransform(
-            #     (x, y, 0.),
-            #     odom_quat,
-            #     current_time,
-            #     "base_link",
-            #     "odom"
-            # )
+            odom_tf.sendTransform(
+                (x, y, 0.),
+                odom_quat,
+                current_time,
+                "base_link",
+                "odom"
+            )
 
             odom = Odometry()
             odom.child_frame_id = "base_link"
