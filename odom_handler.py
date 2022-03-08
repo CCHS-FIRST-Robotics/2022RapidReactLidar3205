@@ -18,7 +18,7 @@ def talk():
             odom_quat = tf.transformations.quaternion_from_euler(0, 0, new_vars[2])
 
             odom_tf.sendTransform(
-                (x, y, 0.),
+                (new_vars[0], new_vars[1], 0.),
                 odom_quat,
                 current_time,
                 "base_link",
