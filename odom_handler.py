@@ -6,7 +6,7 @@ from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Point, Pose, Quaternion, Twist, Vector3
 
 def talk():
-    odom_pub = rospy.Publisher("odom", Odometry, queue_size=50)
+    odom_pub = rospy.Publisher("wheel", Odometry, queue_size=50)
     odom_tf = tf.TransformBroadcaster()
     rospy.init_node('odom_talker', anonymous=True)
 
