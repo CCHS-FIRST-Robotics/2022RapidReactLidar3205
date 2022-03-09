@@ -47,14 +47,14 @@ def talk():
                 odom_quat,
                 current_time,
                 "base_link",
-                "odom"
+                "wheel"
             )
 
             odom = Odometry()
             odom.child_frame_id = "base_link"
             
             odom.header.stamp = current_time
-            odom.header.frame_id = "odom"
+            odom.header.frame_id = "wheel"
 
             odom.pose.pose = Pose(Point(x, y, 0.), Quaternion(*odom_quat))
             odom.twist.twist = Twist(Vector3(x_vel, y_vel, 0), Vector3(0, 0, a_vel))
