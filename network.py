@@ -18,6 +18,7 @@ def send_tf_data(trans, rot, dt):
                                         # angle = {-w, z < 0}
                                         #         {w,  z > 0}
     lidar.putNumber("dt", dt)
+    NetworkTables.flush()
 
 def send_map_data(map_array, width, height, origin_x, origin_y):
     point.putNumberArray("m_array", map_array)
@@ -25,6 +26,7 @@ def send_map_data(map_array, width, height, origin_x, origin_y):
     point.putNumber("m_height", height)
     point.putNumber("m_origin_x", origin_x)
     point.putNumber("m_origin_y", origin_y)
+    NetworkTables.flush()
 
 def get_reset():
     reset = lidar.getBoolean("reset", False)
