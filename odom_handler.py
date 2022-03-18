@@ -6,20 +6,16 @@ from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Point, Pose, Quaternion, Twist, Vector3
 
 def talk():
-    rate = rospy.Rate(60)
-
     last_vars = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     odom_lock = True
 
     # Creates odom topic when network tables are initialized
     while odom_lock: 
-        if nw.get_state != last_vars:
+        if nw.get_state() != last_vars:
             odom_pub = rospy.Publisher("odom", Odometry, queue_size=50)
             # odom_tf = tf.TransformBroadcaster()
             rospy.init_node('odom_talker', anonymous=True)
             odom_lock = False
-
-            rate.sleep()
 
     x = 0.0
     y = 0.0
@@ -71,8 +67,6 @@ def talk():
 
             odom_pub.publish(odom)
             current_vars = last_vars
-
-            rate.sleep()
 
 if __name__ == "__main__":
     talk()
