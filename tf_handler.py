@@ -7,9 +7,9 @@ time_last_sent = 0
 def callback(data):  # processes data heard from listener
     import tf_handler as tf
     
-    trans = data.transforms[1].transform.translation  # x and y translations in meters, z = 0
-    rot = data.transforms[1].transform.rotation  # z = rotation in radians/pi, w = constant
-    nsex = data.transforms[1].header.stamp.nsecs
+    trans = data.transforms[0].transform.translation  # x and y translations in meters, z = 0
+    rot = data.transforms[0].transform.rotation  # z = rotation in radians/pi, w = constant
+    nsex = data.transforms[0].header.stamp.nsecs
 
     if tf.time_last_sent == 0:
         tf.time_last_sent = nsex

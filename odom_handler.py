@@ -6,15 +6,23 @@ from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Point, Pose, Quaternion, Twist, Vector3
 
 def talk():
-    odom_pub = rospy.Publisher("wheel", Odometry, queue_size=50)
-    odom_tf = tf.TransformBroadcaster()
-    rospy.init_node('odom_talker', anonymous=True)
+
+    last_vars = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    odom_lock = True
+
+    # Creates odom topic when network tables are initialized
+    while odom_lock: 
+        if nw.get_state != last_vars:
+            odom_pub = rospy.Publisher("odom", Odometry, queue_size=50)
+            # odom_tf = tf.TransformBroadcaster()
+            rospy.init_node('odom_talker', anonymous=True)
+            
+            odom_lock = False
 
     x = 0.0
     y = 0.0
     th = 0.0
-    
-    last_vars = []
+
     current_time = rospy.Time.now()
     last_time = rospy.Time.now()
 
@@ -42,19 +50,19 @@ def talk():
 
             odom_quat = tf.transformations.quaternion_from_euler(0, 0, th)
 
-            odom_tf.sendTransform(
-                (x, y, 0.),
-                odom_quat,
-                current_time,
-                "base_link",
-                "wheel"
-            )
+            # odom_tf.sendTransform(
+            #     (x, y, 0.),
+            #     odom_quat,
+            #     current_time,
+            #     "base_link",
+            #     "odom"
+            # )
 
             odom = Odometry()
             odom.child_frame_id = "base_link"
             
             odom.header.stamp = current_time
-            odom.header.frame_id = "wheel"
+            odom.header.frame_id = "odom"
 
             odom.pose.pose = Pose(Point(x, y, 0.), Quaternion(*odom_quat))
             odom.twist.twist = Twist(Vector3(x_vel, y_vel, 0), Vector3(0, 0, a_vel))
