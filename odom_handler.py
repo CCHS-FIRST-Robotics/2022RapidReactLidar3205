@@ -6,7 +6,7 @@ from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Point, Pose, Quaternion, Twist, Vector3
 
 def talk():
-    rate = rospy.Rate(10)
+    rate = rospy.Rate(60)
 
     last_vars = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     odom_lock = True
