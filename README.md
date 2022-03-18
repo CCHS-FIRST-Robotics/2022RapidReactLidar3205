@@ -33,6 +33,8 @@ Important Articles:
     https://www.miguelalonsojr.com/blog/robotics/ros/python3/2019/08/20/ros-melodic-python-3-build.html
     
     https://manialabs.wordpress.com/2012/08/06/covariance-matrices-with-a-practical-example/
+    
+    http://wiki.ros.org/navigation/Tutorials/RobotSetup/Odom
 
 
 Notes:
