@@ -24,13 +24,15 @@ def talk():
     current_time = rospy.Time.now()
     last_time = rospy.Time.now()
 
-    while True:
+    rate = rospy.Rate(100) # in 1/s, TODO: change when optimal rate is determined
+
+    while not rospy.is_shutdown():
         current_vars = nw.get_state() # x_pos (0), y_pos (1), heading (2), x_vel (3), y_vel (4), a_vel (5)
 
         if current_vars != last_vars:
             x_pos  = current_vars[0]
             y_pos  = current_vars[1]
-            th_pos = current_vars[2]
+            heading = current_vars[2]
             x_vel  = current_vars[3]
             y_vel  = current_vars[4]
             a_vel  = current_vars[5]
@@ -38,8 +40,8 @@ def talk():
             current_time = rospy.Time.now()
             dt = (current_time - last_time).to_sec()
 
-            delta_x = (x_vel * cos(th_pos) - y_vel * sin(th_pos)) * dt
-            delta_y = (x_vel * sin(th_pos) + y_vel * cos(th_pos)) * dt
+            delta_x = (x_vel * cos(heading) - y_vel * sin(heading)) * dt
+            delta_y = (x_vel * sin(heading) + y_vel * cos(heading)) * dt
             delta_th = a_vel * dt
 
             x += delta_x

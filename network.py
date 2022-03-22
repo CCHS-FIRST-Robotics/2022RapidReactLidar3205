@@ -12,9 +12,10 @@ point = NetworkTables.getTable("point")
 def send_tf_data(trans, rot, dt):
     lidar.putNumber("p_x_pos", trans.x)
     lidar.putNumber("p_y_pos", trans.y)
-    lidar.putNumber("p_heading", rot.w) # rot.w is the position of the point the lidar in rotating around
-                                        # z decreases as the lidar rotates cw, increases as the lidar rotates cw'
-                                        # w = |radians/pi|
+    lidar.putNumber("p_heading", rot.w) # rot.w is magnitude of the heading (z)
+                                        # z decreases as the lidar rotates cw, increases as the lidar rotates cw' 
+                                        # z, w = 0 at north
+                                        # w magnitude of radians/pi
                                         # angle = {-w, z < 0}
                                         #         {w,  z > 0}
     lidar.putNumber("dt", dt)
