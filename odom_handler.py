@@ -40,13 +40,15 @@ def talk():
             current_time = rospy.Time.now()
             dt = (current_time - last_time).to_sec()
 
-            delta_x = (x_vel * cos(heading) - y_vel * sin(heading)) * dt
-            delta_y = (x_vel * sin(heading) + y_vel * cos(heading)) * dt
-            delta_th = a_vel * dt
+            dx = 0
+            dy = 0
+            dth = 0
 
-            x += delta_x
-            y += delta_y
-            th += delta_th
+            # TODO: determine how to calculate deltas --> computing odometry
+
+            x += dx
+            y += dy
+            th += dth
 
             odom_quat = tf.transformations.quaternion_from_euler(0, 0, th)
 
@@ -64,8 +66,9 @@ def talk():
             odom.header.stamp = current_time
             odom.header.frame_id = "odom"
 
-            odom.pose.pose = Pose(Point(x, y, 0.), Quaternion(*odom_quat))
-            odom.twist.twist = Twist(Vector3(x_vel, y_vel, 0), Vector3(0, 0, a_vel))
+            # odom.pose.pose = Pose(Point(x, y, 0.), Quaternion(*odom_quat))
+            # odom.twist.twist = Twist(Vector3(x_vel, y_vel, 0), Vector3(0, 0, a_vel))
+            odom.pose.pose.position.x = x
 
             odom_pub.publish(odom)
             current_vars = last_vars
