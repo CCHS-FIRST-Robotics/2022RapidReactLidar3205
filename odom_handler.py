@@ -3,7 +3,8 @@ import rospy
 import network as nw
 from math import sin, cos, pi
 from nav_msgs.msg import Odometry
-from geometry_msgs.msg import Point, Pose, Quaternion, Twist, Vector3
+from geometry_msgs.msg import Point, Pose, Quaternion, Twist, Vector3, TransformStamped
+
 
 def talk():
     last_vars = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -16,10 +17,6 @@ def talk():
             # odom_tf = tf.TransformBroadcaster()
             rospy.init_node('odom_talker', anonymous=True)
             odom_lock = False
-
-    x = 0.0
-    y = 0.0
-    th = 0.0
 
     current_time = rospy.Time.now()
     last_time = rospy.Time.now()
@@ -40,37 +37,40 @@ def talk():
             current_time = rospy.Time.now()
             dt = (current_time - last_time).to_sec()
 
-            dx = 0
-            dy = 0
-            dth = 0
+            odom_quat = tf.transformations.quaternion_from_euler(0, 0, heading) # use th, or use heading?
 
-            # TODO: determine how to calculate deltas --> computing odometry
+            odom_trans = TransformStamped()
+            odom_trans.header.stamp = current_time
+            odom_trans.header.frame_id = "odom"
+            odom_trans.child_frame_id = "base_link"
 
-            x += dx
-            y += dy
-            th += dth
+            odom_br = tf.TransformBroadcaster()
 
-            odom_quat = tf.transformations.quaternion_from_euler(0, 0, th)
+            odom_trans.transform.translation.x = x_pos
+            print(odom_trans.transform.translation.x) # testing if able to set values like this
+            odom_trans.transform.translation.y = y_pos
+            odom_trans.transform.translation.z = 0.0
+            odom_trans.transform.rotation = odom_quat
 
-            # odom_tf.sendTransform(
-            #     (x, y, 0.),
-            #     odom_quat,
-            #     current_time,
-            #     "base_link",
-            #     "odom"
-            # )
+            odom_br.sendTransform(odom_trans)
 
             odom = Odometry()
-            odom.child_frame_id = "base_link"
-            
             odom.header.stamp = current_time
             odom.header.frame_id = "odom"
 
-            # odom.pose.pose = Pose(Point(x, y, 0.), Quaternion(*odom_quat))
-            # odom.twist.twist = Twist(Vector3(x_vel, y_vel, 0), Vector3(0, 0, a_vel))
-            odom.pose.pose.position.x = x
+            odom.pose.pose.position.x = x_pos
+            odom.pose.pose.position.y = y_pos
+            odom.pose.pose.position.z = 0.0
+            odom.pose.pose.orientation = odom_quat
+
+            odom.child_frame_id = "base_link"
+            odom.twist.twist.linear.x = x_vel
+            odom.twist.twist.linear.y = y_vel
+            odom.twist.twist.angular.z = a_vel
 
             odom_pub.publish(odom)
+
+            list_time = current_time
             current_vars = last_vars
 
 if __name__ == "__main__":
